@@ -1,7 +1,7 @@
 import heapq
 s=input().split(' ')
 d=set()
-d2i={'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'x':0}
+d2i={'1':0,'2':1,'3':2,'4':3,'5':4,'6':5,'7':6,'8':7,'x':8}
 k=0
 for i in range(8):
     for j in range(i+1,9):
@@ -16,8 +16,11 @@ if(k%2):
 hp=[]
 heapq.heappush(hp,(0,tuple(s),"",s.index('x')))
 def f(y):
-    t=y.index('x')
-    return 2-t//3+2-t%3
+    s=0
+    for i in y:
+        t=y.index(i)
+        s+=d2i[i]//3-t//3+d2i[i]%3-t%3
+    return s
 while(len(hp)):
     g,tv,path,b=heapq.heappop(hp)
     x=list(tv)
